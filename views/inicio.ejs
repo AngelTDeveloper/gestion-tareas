@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <%- include('./partials/head', { titulo: 'Pendientes' }) %>
+</head>
+<body class="min-h-screen flex flex-col bg-mist font-sans text-ink">
+  <%- include('./partials/navbar', { activo: 'pendientes' }) %>
+
+  <main class="flex-grow w-full max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="flex flex-wrap items-end justify-between gap-3 mb-8">
+      <div>
+        <h1 class="text-4xl font-extrabold tracking-tight">Pendientes</h1>
+        <p class="text-ink/60 mt-1">
+          <%= tareas.length %> <%= tareas.length === 1 ? 'tarea por hacer' : 'tareas por hacer' %>
+        </p>
+      </div>
+      <a href="/tareas/crear" class="bg-signal text-white px-4 py-2 rounded-md font-semibold hover:brightness-110 transition">
+        Nueva tarea
+      </a>
+    </div>
+
+    <div id="mensaje" class="hidden mb-4 rounded-md px-4 py-3 font-medium"></div>
+
+    <% if (tareas.length === 0) { %>
+      <div class="bg-sheet rounded-lg border border-dashed border-ink/25 p-10 text-center">
+        <p class="text-xl font-semibold">No tienes tareas pendientes</p>
+        <p class="text-ink/60 mt-1 mb-5">Crea una tarea para empezar a organizarte.</p>
+        <a href="/tareas/crear" class="inline-block bg-signal text-white px-4 py-2 rounded-md font-semibold hover:brightness-110 transition">
+          Crear mi primera tarea
+        </a>
+      </div>
+    <% } else { %>
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-5" id="lista-tareas">
+        <% tareas.forEach(tarea => { %>
+          <%- include('./partials/tarjeta', { tarea }) %>
+        <% }) %>
+      </section>
+    <% } %>
+  </main>
+
+  <%- include('./partials/footer') %>
+  <script src="/js/tareas.js"></script>
+</body>
+</html>

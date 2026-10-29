@@ -1,0 +1,18 @@
+<%
+  const enlace = (clave, href, texto) => {
+    const activoClase = activo === clave
+      ? 'bg-white text-ink'
+      : 'text-white/80 hover:text-white hover:bg-white/10';
+    return `<a href="${href}" class="px-4 py-2 rounded-md font-semibold transition ${activoClase}">${texto}</a>`;
+  };
+%>
+<header class="bg-ink sticky top-0 z-10">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+    <a href="/" class="text-2xl font-extrabold text-white tracking-tight">Mis tareas</a>
+    <nav class="flex flex-wrap gap-1">
+      <%- enlace('pendientes', '/', 'Pendientes') %>
+      <%- enlace('completadas', '/completadas', 'Completadas') %>
+      <%- enlace('crear', '/tareas/crear', 'Nueva tarea') %>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,31 @@
+<%# Formulario compartido por crear.ejs y editar.ejs. Recibe: tarea (opcional) %>
+<% const esEdicion = typeof tarea !== 'undefined' && tarea; %>
+<form id="form-tarea" novalidate <%- esEdicion ? `data-id="${tarea._id}"` : '' %>
+  class="bg-sheet rounded-lg border border-ink/10 p-6 md:p-8 flex flex-col gap-5">
+
+  <div id="mensaje" class="hidden rounded-md px-4 py-3 font-medium" role="alert"></div>
+
+  <div>
+    <label for="titulo" class="block font-semibold mb-1">Título</label>
+    <input type="text" id="titulo" name="titulo" maxlength="100" required
+      value="<%= esEdicion ? tarea.titulo : '' %>"
+      class="w-full px-4 py-2 border border-ink/25 rounded-md focus:outline-none focus:ring-2 focus:ring-signal"
+      placeholder="Ej: Entregar el proyecto del módulo 6">
+    <p class="text-sm text-ink/55 mt-1">Entre 3 y 100 caracteres.</p>
+  </div>
+
+  <div>
+    <label for="descripcion" class="block font-semibold mb-1">Descripción <span class="font-normal text-ink/55">(opcional)</span></label>
+    <textarea id="descripcion" name="descripcion" rows="4" maxlength="500"
+      class="w-full px-4 py-2 border border-ink/25 rounded-md focus:outline-none focus:ring-2 focus:ring-signal"
+      placeholder="Detalles de lo que hay que hacer"><%= esEdicion ? tarea.descripcion : '' %></textarea>
+    <p class="text-sm text-ink/55 mt-1">Máximo 500 caracteres.</p>
+  </div>
+
+  <div class="flex flex-wrap gap-3">
+    <button type="submit" class="bg-signal text-white px-5 py-2 rounded-md font-semibold hover:brightness-110 transition">
+      <%= esEdicion ? 'Guardar cambios' : 'Crear tarea' %>
+    </button>
+    <a href="/" class="px-5 py-2 rounded-md font-semibold text-ink/70 hover:bg-ink/5 transition">Cancelar</a>
+  </div>
+</form>
